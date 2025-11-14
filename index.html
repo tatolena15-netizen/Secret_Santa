@@ -14,22 +14,12 @@ body {
 }
 h1 { color: #d10000; text-shadow: 2px 2px #ffcccc; font-size: 60px; }
 p { color: #b30000; font-size: 20px; }
-input, button, textarea {
+input, button {
     font-size: 18px;
     padding: 10px;
     margin: 5px;
     border-radius: 10px;
     border: 2px solid #d10000;
-}
-button.saveButton {
-    background-color: #ff0000;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-button.saveButton:hover {
-    background-color: #cc0000;
-    transform: scale(1.05);
 }
 button#checkBtn {
     background-color: #ff6666;
@@ -37,7 +27,6 @@ button#checkBtn {
     transition: 0.3s;
 }
 button#checkBtn:hover { background-color: #ff4d4d; transform: scale(1.05); }
-textarea { width: 80%; height: 150px; box-shadow: 2px 2px 10px #ffcccc; }
 
 .snowflake {
     position: absolute;
@@ -56,6 +45,8 @@ textarea { width: 80%; height: 150px; box-shadow: 2px 2px 10px #ffcccc; }
 }
 
 #wishlistSection { display:none; margin-top:30px; }
+#wishlistSection a { color: #d10000; font-weight: bold; text-decoration: none; }
+#wishlistSection a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -71,10 +62,8 @@ textarea { width: 80%; height: 150px; box-shadow: 2px 2px 10px #ffcccc; }
     <h2>Ти даруєш: <span id="receiverName"></span></h2>
     <h3>Його/її вішліст:</h3>
     <ul id="receiverWishlist"></ul>
-    <h3>Додай свої побажання до свого вішліста:</h3>
-    <textarea id="myWishlist" placeholder="Мої побажання..."></textarea>
-    <br>
-    <button class="saveButton" onclick="saveMyWishlist()">Зберегти</button>
+    <h3>Свої побажання залиште тут:</h3>
+    <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdnO_mrE8cJ30q95JBATOdaRkZqt4jZYwrIKTEIM3b9p6uzAQ/viewform?usp=dialog" target="_blank">Заповнити Google Форму 🎁</a></p>
 </div>
 
 <script>
@@ -108,13 +97,14 @@ function createSnowflake() {
     snowflake.innerText = '❄';
     document.body.appendChild(snowflake);
 }
+setInterval(createSnowflake, 300);
 
 // Основна логіка
 function checkName() {
     const input = document.getElementById("nameInput").value.trim().toLowerCase();
     let found = false;
     for (const key in pairs) {
-        if (key.toLowerCase() === input) {
+        if(key.toLowerCase() === input) {
             const receiver = pairs[key];
 
             // Кожного разу при натисканні створюємо ще 30 сніжинок
@@ -129,7 +119,6 @@ function checkName() {
                 ul.appendChild(li);
             }
             document.getElementById('wishlistSection').style.display = 'block';
-            loadMyWishlist();
 
             found = true;
             break;
@@ -137,17 +126,6 @@ function checkName() {
     }
     if (!found) {
         document.getElementById("error").innerText = "Такого імені немає у списку!";
-    }
-}
-
-<div id="wishlistSection">
-    <h2>Ти даруєш: <span id="receiverName"></span></h2>
-    <h3>Його/її вішліст:</h3>
-    <ul id="receiverWishlist"></ul>
-    <h3>Свої побажання залиште тут:</h3>
-    <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdnO_mrE8cJ30q95JBATOdaRkZqt4jZYwrIKTEIM3b9p6uzAQ/viewform?usp=dialog" target="_blank">Заповнити Google Форму 🎁</a></p>
-</div>
-
     }
 }
 </script>
