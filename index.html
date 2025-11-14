@@ -140,24 +140,14 @@ function checkName() {
     }
 }
 
-// Збереження побажань
-function saveMyWishlist() {
-    const myName = document.getElementById("nameInput").value.trim();
-    const myText = document.getElementById("myWishlist").value.trim();
-    if(myName && myText) {
-        localStorage.setItem("wishlist_" + myName.toLowerCase(), myText);
-        alert("Побажання збережено!");
-    } else {
-        alert("Введіть своє ім'я та побажання!");
-    }
-}
+<div id="wishlistSection">
+    <h2>Ти даруєш: <span id="receiverName"></span></h2>
+    <h3>Його/її вішліст:</h3>
+    <ul id="receiverWishlist"></ul>
+    <h3>Свої побажання залиште тут:</h3>
+    <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdnO_mrE8cJ30q95JBATOdaRkZqt4jZYwrIKTEIM3b9p6uzAQ/viewform?usp=dialog" target="_blank">Заповнити Google Форму 🎁</a></p>
+</div>
 
-function loadMyWishlist() {
-    const myName = document.getElementById("nameInput").value.trim();
-    if(!myName) return;
-    const saved = localStorage.getItem("wishlist_" + myName.toLowerCase());
-    if(saved) {
-        document.getElementById("myWishlist").value = saved;
     }
 }
 </script>
