@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Secret Santa</title>
+    <script src="data.js"></script>
+    <style>
+        body {{ font-family: sans-serif; text-align: center; padding: 40px; }}
+        input, button {{ font-size: 20px; padding: 10px; }}
+    </style>
+</head>
+<body>
+    <h1>Secret Santa 🎁</h1>
+    <p>Введи своє ім’я точно як у списку:</p>
+
+    <input id="nameInput" placeholder="Наприклад: Олена">
+    <br><br>
+    <button onclick="checkName()">Дізнатись</button>
+
+    <p id="error" style="color:red;"></p>
+
+    <script>
+        function checkName() {{
+            const name = document.getElementById("nameInput").value.trim();
+            if (pairs[name]) {{
+                const target = pairs[name];
+                window.location.href = `wishlist/${{target}}.html`;
+            }} else {{
+                document.getElementById("error").innerText = "Такого імені немає у списку!";
+            }}
+        }}
+    </script>
+</body>
+</html>
