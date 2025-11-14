@@ -5,13 +5,13 @@
     <title>Secret Santa</title>
     <script src="data.js"></script>
     <style>
-        body {{ font-family: sans-serif; text-align: center; padding: 40px; }}
-        input, button {{ font-size: 20px; padding: 10px; }}
+        body { font-family: sans-serif; text-align: center; padding: 40px; }
+        input, button { font-size: 20px; padding: 10px; }
     </style>
 </head>
 <body>
     <h1>Secret Santa 🎁</h1>
-    <p>Введи своє ім’я точно як у списку:</p>
+    <p>Введи своє ім’я (велика/мала літера не важлива):</p>
 
     <input id="nameInput" placeholder="Наприклад: Олена">
     <br><br>
@@ -20,15 +20,20 @@
     <p id="error" style="color:red;"></p>
 
     <script>
-        function checkName() {{
-            const name = document.getElementById("nameInput").value.trim();
-            if (pairs[name]) {{
-                const target = pairs[name];
-                window.location.href = `wishlist/${{target}}.html`;
-            }} else {{
+        function checkName() {
+            const nameInput = document.getElementById("nameInput").value.trim().toLowerCase();
+            let found = false;
+            for (const key in pairs) {
+                if (key.toLowerCase() === nameInput) {
+                    window.location.href = `wishlist/${pairs[key]}.html`;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
                 document.getElementById("error").innerText = "Такого імені немає у списку!";
-            }}
-        }}
+            }
+        }
     </script>
 </body>
 </html>
